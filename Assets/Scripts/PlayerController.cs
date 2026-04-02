@@ -5,11 +5,21 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 3f; // Velocidade do player
+    public float speed = 3f;
+    public InputAction MoveAction;
+
+    Rigidbody2D rigidbody2d;
+    Vector2 move;
+
+    void Start()
+    {
+        MoveAction.Enable();
+        rigidbody2d = GetComponent<Rigidbody2D>();
+    }
 
     void Update()
     {
-        Vector2 move = Vector2.zero;
+        move = Vector2.zero;
 
         // Lê WASD + setas
         if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed)
@@ -29,18 +39,18 @@ public class PlayerController : MonoBehaviour
             move.x += 1f;
         }
 
-        // Normaliza para diagonais
+        // Normaliza diagonal
         if (move.magnitude > 1f)
         {
             move.Normalize();
         }
 
-        // Aplica movimento
-        Vector2 position = (Vector2)transform.position;
-        position += move * speed * Time.deltaTime;
-        transform.position = position;
-
-        // Debug opcional
         Debug.Log(move);
+    }
+
+    void FixedUpdate()
+    {
+        Vector2 position = rigidbody2d.position + move * speed * Time.fixedDeltaTime;
+        rigidbody2d.MovePosition(position);
     }
 }
