@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 255841382d607e24a8317d9ab167f414
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271239
+  packageName: 'Unity Learn | 2D Adventure Game: Robot Repair'
+  packageVersion: 2.0.0
+  assetPath: Assets/_2DAdventureGame/Art/Ruby/Characters/NonPlayerCharacterSheet.png
+  uploadId: 832758
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -128,6 +135,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -136,11 +156,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 512
-        height: 512
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -149,6 +169,72 @@ TextureImporter:
       bones: []
       spriteID: becbd8f1e84bd469a9a0a18963899b03
       internalID: -848373059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NonPlayerCharacterSheet_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d7c41481c175f14eb646ad4b0d99acf
+      internalID: -375246745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NonPlayerCharacterSheet_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f09fcd4a51a2a3b478015989c3f1b965
+      internalID: 1152841913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NonPlayerCharacterSheet_3
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d930f7260aa681648ae7e8ca46677605
+      internalID: 1456364973
       vertices: []
       indices: 
       edges: []
@@ -165,18 +251,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":2.0},"gridSpriteSize":{"x":256.0,"y":256.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       NonPlayerCharacterSheet_0: -848373059
+      NonPlayerCharacterSheet_1: -375246745
+      NonPlayerCharacterSheet_2: 1152841913
+      NonPlayerCharacterSheet_3: 1456364973
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 271239
-  packageName: 'Unity Learn | 2D Adventure Game: Robot Repair'
-  packageVersion: 2.0.0
-  assetPath: Assets/_2DAdventureGame/Art/Ruby/Characters/NonPlayerCharacterSheet.png
-  uploadId: 832758
