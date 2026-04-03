@@ -8,19 +8,27 @@ public class EnemyController : MonoBehaviour
 
     private Rigidbody2D rigidbody2d;
     private Animator animator;
+    private AudioSource audioSource;  // referência ao áudio do inimigo
     private float timer;
     private int direction = 1;
     bool broken = true;
+    public ParticleSystem smokeEffect;
 
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();  // pega o AudioSource anexado ao inimigo
         timer = changeTime;
+
+        if (audioSource != null)
+            audioSource.Play(); // toca áudio agressivo quando o inimigo está ativo
     }
 
     void Update()
     {
+        if (!broken) return; // inimigo consertado não precisa atualizar animação de movimento
+
         timer -= Time.deltaTime;
         if (timer < 0f)
         {
@@ -42,6 +50,7 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
     void FixedUpdate()
     {
         if (!broken) return; // inimigo consertado não se move
@@ -55,17 +64,28 @@ public class EnemyController : MonoBehaviour
 
         rigidbody2d.MovePosition(position);
     }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         PlayerController player = other.GetComponent<PlayerController>();
         if (player != null)
             player.ChangeHealth(-1);
     }
+
     public void Fix()
     {
         broken = false;
-        GetComponent<Rigidbody2D>().simulated = false;
-        animator.SetTrigger("Fixed");
+
+        rigidbody2d.simulated = false;
+
+        if (animator != null)
+            animator.SetTrigger("Fixed");
+
+        // Para o áudio quando inimigo é consertado
+        if (audioSource != null)
+            audioSource.Stop();
+        smokeEffect.Stop();
+
     }
 
 }

@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
 
     // Vida
     public int maxHealth = 5;
-    int currentHealth;
     public int health { get { return currentHealth; } }
+    int currentHealth;
 
     // Invencibilidade
     public float timeInvincible = 2.0f;
@@ -26,33 +26,39 @@ public class PlayerController : MonoBehaviour
     // Projetil
     public GameObject projectilePrefab;
 
+    // Áudio
+    AudioSource audioSource;
+    public AudioClip projectileClip;   // som do projétil
+    public AudioClip playerHitClip;    // som quando o jogador recebe dano
+
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        // INPUT (GETAXIS)
+        // Input clássico usando GetAxis
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
         move = new Vector2(horizontal, vertical);
 
-        // DIREÇÃO PARA ANIMAÇÃO
+        // Direção para animação
         if (move.magnitude > 0.01f)
         {
             moveDirection = move.normalized;
         }
 
-        // ANIMAÇÕES
+        // Animações
         animator.SetFloat("Look X", moveDirection.x);
         animator.SetFloat("Look Y", moveDirection.y);
         animator.SetFloat("Speed", move.magnitude);
 
-        // INVENCIBILIDADE
+        // Invencibilidade
         if (isInvincible)
         {
             damageCooldown -= Time.deltaTime;
@@ -62,13 +68,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // DISPARAR
+        // Disparo
         if (Input.GetKeyDown(KeyCode.C))
         {
             Launch();
         }
 
-        // INTERAÇÃO NPC
+        // Interação NPC
         if (Input.GetKeyDown(KeyCode.X))
         {
             FindFriend();
@@ -77,8 +83,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 position = rigidbody2d.position + move * speed * Time.fixedDeltaTime;
-        rigidbody2d.MovePosition(position);
+        Vector2 newPosition = rigidbody2d.position + move * speed * Time.fixedDeltaTime;
+        rigidbody2d.MovePosition(newPosition);
     }
 
     public void ChangeHealth(int amount)
@@ -91,10 +97,12 @@ public class PlayerController : MonoBehaviour
             isInvincible = true;
             damageCooldown = timeInvincible;
             animator.SetTrigger("Hit");
+
+            // Tocar som de dano
+            PlaySound(playerHitClip);
         }
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-
         UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
     }
 
@@ -109,9 +117,13 @@ public class PlayerController : MonoBehaviour
         );
 
         Projectile projectile = projectileObject.GetComponent<Projectile>();
-        projectile.Launch(moveDirection, 300);
+        if (projectile != null)
+            projectile.Launch(moveDirection, 300);
 
         animator.SetTrigger("Launch");
+
+        // Tocar som do projétil
+        PlaySound(projectileClip);
     }
 
     void FindFriend()
@@ -126,11 +138,16 @@ public class PlayerController : MonoBehaviour
         if (hit.collider != null)
         {
             NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
-
             if (character != null)
             {
                 UIHandler.instance.DisplayDialogue();
             }
         }
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+            audioSource.PlayOneShot(clip);
     }
 }
